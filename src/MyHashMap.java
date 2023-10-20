@@ -1,6 +1,19 @@
 public class MyHashMap<K, V> {
     private int size = 100;
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
     private Entry<K, V>[] table = new Entry[size];
+
+    public void setTable(Entry<K, V>[] table) {
+        this.table = table;
+    }
 
     static class Entry<K, V> {
         K key;
@@ -13,12 +26,33 @@ public class MyHashMap<K, V> {
             this.next = next;
         }
     }
+    public void resize(K key){
+        int originalSize = size;
+        int hashKey = key.hashCode();
+        if (hashKey > getSize()){
+            setSize(hashKey+1);
+            Entry<K, V>[] tempTable = new Entry[size];
+            for (int i = 0; i < originalSize; i++) {
+                if(table[i] != null){
+                    tempTable[i]=table[i];
+
+                }
+            }
+            setTable(tempTable);
+        }
+
+
+    }
+
 
     public void put(K key, V value) {
+        resize(key);
         Entry<K, V> entry = new Entry<K, V>(key, value, null);
+
         if (key == null) {
             System.out.println("the key cannot be null");
         } else {
+
             int hashKey = key.hashCode();
             if (table[hashKey] == null) { //если место не занято
                 table[hashKey] = entry;
@@ -126,5 +160,6 @@ public class MyHashMap<K, V> {
         }
         return true;
     }
+
 
 }

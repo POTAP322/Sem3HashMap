@@ -13,13 +13,17 @@ public class Main {
         hashmap.size();
         MyHashMap kekMy = new MyHashMap();
 
+
         kekMy.put(44,"fsdfs");
         kekMy.put(49,"4354354353");
         kekMy.put(97,"dsadas");
         kekMy.put("a","megaman");
         kekMy.put("a","trapikbabik");
         kekMy.put(97,"alalalalla");
+        kekMy.put(105,"wtffff");
+
         kekMy.put(50,hashmap);
+
         kekMy.printMyHashMap();
 //        String keysik = (String) kekMy.get(97);
 //        String keysik2 = (String) kekMy.get("a");

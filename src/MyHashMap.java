@@ -1,5 +1,5 @@
 public class MyHashMap<K, V> {
-    private int size = 100;
+    private int size = 10;
 
     public void setSize(int size) {
         this.size = size;
@@ -26,27 +26,25 @@ public class MyHashMap<K, V> {
             this.next = next;
         }
     }
-    public void resize(K key){
-        int originalSize = size;
-        int hashKey = key.hashCode();
-        if (hashKey > getSize()){
-            setSize(hashKey+1);
-            Entry<K, V>[] tempTable = new Entry[size];
-            for (int i = 0; i < originalSize; i++) {
-                if(table[i] != null){
-                    tempTable[i]=table[i];
-
-                }
-            }
-            setTable(tempTable);
-        }
-
-
-    }
+//    public void resize(K key){ //старый способ добавление ключа , который больше чем size
+//        int originalSize = size;
+//        int hashKey = key.hashCode();
+//        if (hashKey > getSize()){
+//            setSize(hashKey+1);
+//            Entry<K, V>[] tempTable = new Entry[size];
+//            for (int i = 0; i < originalSize; i++) {
+//                if(table[i] != null){
+//                    tempTable[i]=table[i];
+//
+//                }
+//            }
+//            setTable(tempTable);
+//        }
+//    }
 
 
     public void put(K key, V value) {
-        resize(key);
+        //resize(key);
         Entry<K, V> entry = new Entry<K, V>(key, value, null);
 
         if (key == null) {
@@ -54,16 +52,16 @@ public class MyHashMap<K, V> {
         } else {
 
             int hashKey = key.hashCode();
-            if (table[hashKey] == null) { //если место не занято
-                table[hashKey] = entry;
+            if (table[hashKey%size] == null) { //если место не занято
+                table[hashKey%size] = entry;
             } else {
                 Entry<K, V> previous = null;
-                Entry<K, V> current = table[hashKey];
+                Entry<K, V> current = table[hashKey%size];
                 while (current != null) {
                     if (current.key.equals(key)) { //если узел занят и он equals нашему новому узлу, то заменяем
                         if (previous == null) { //предыдущего нету(тобишь курент - первый)
                             entry.next = current.next;//просто заменяем но новое
-                            table[hashKey] = entry;
+                            table[hashKey%size] = entry;
                             return;
                         } else {
                             entry.next = current.next; //заменяем, но ещё делаем значением next для предыдущего
@@ -84,7 +82,7 @@ public class MyHashMap<K, V> {
             if (table[i] != null) {
                 Entry<K, V> entry = table[i];
                 while (entry != null) {
-                    System.out.println("(" + entry.key + "{" + entry.key.hashCode() + "}" + ":" + entry.value + " " + entry.next + ") ");
+                    System.out.println("(" + entry.key + "{" + entry.key.hashCode() +" "+i+ "}" + ":" + entry.value + " " + entry.next + ") ");
                     entry = entry.next;
                 }
             }
@@ -96,10 +94,10 @@ public class MyHashMap<K, V> {
             System.out.println("the key cannot be null");
         } else {
             int hashKey = key.hashCode();
-            if (table[hashKey] == null) {
+            if (table[hashKey%size] == null) {
                 return null;
             } else {
-                Entry<K, V> current = table[hashKey];
+                Entry<K, V> current = table[hashKey%size];
 
                 if (current.key.equals(key)) {
                     return current.value;
@@ -119,15 +117,15 @@ public class MyHashMap<K, V> {
             System.out.println("the key cannot be null");
         } else {
             int hashKey = key.hashCode();
-            if (table[hashKey] == null) {
+            if (table[hashKey%size] == null) {
                 System.out.println("nothing was found for this key");
             } else {
-                Entry<K, V> current = table[hashKey];
+                Entry<K, V> current = table[hashKey%size];
                 Entry<K, V> previous = null;
                 while (current != null){
                     if (current.key.equals(key)) {
                         if (previous == null) { //предыдущего нету(тобишь курент - первый)
-                            table[hashKey] = table[hashKey].next;
+                            table[hashKey%size] = table[hashKey%size].next;
                         } else {
                             previous.next = current.next;
                         }
@@ -138,7 +136,7 @@ public class MyHashMap<K, V> {
             }
         }
     }
-    public int size(){
+    public int entryCount(){
         int counter = 0;
         for (int i = 0; i < size; i++) {
             if (table[i] !=null){

@@ -1,9 +1,5 @@
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Objects;
-
-import static java.util.Objects.hash;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,22 +17,25 @@ public class Main {
         kekMy.put("a","trapikbabik");
         kekMy.put(97,"alalalalla");
         kekMy.put(105,"wtffff");
+        kekMy.put("AA",432);
 
         kekMy.put(50,hashmap);
 
         kekMy.printMyHashMap();
-//        String keysik = (String) kekMy.get(97);
-//        String keysik2 = (String) kekMy.get("a");
-//        System.out.println(keysik);
-//        System.out.println(keysik2);
+        String keysik = (String) kekMy.get(97);
+        String keysik2 = (String) kekMy.get("a");
+        System.out.println(keysik);
+        System.out.println(keysik2);
 
-//        System.out.println("___________");
-//
-//        kekMy.remove("a");
-//        kekMy.printMyHashMap();
+        System.out.println("___________");
+
+        kekMy.remove("a");
+        kekMy.printMyHashMap();
         System.out.println("Size: ");
-        System.out.println(kekMy.size());
+        System.out.println(kekMy.entryCount());
         System.out.println(kekMy.isEmpty());
+
+        System.out.println(2088%7);
 
 //        String Str1 = "a";
 //        String Str2 = Str1;

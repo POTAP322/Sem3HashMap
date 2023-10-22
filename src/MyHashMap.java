@@ -1,3 +1,7 @@
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class MyHashMap<K, V> {
     private int size = 10;
 
@@ -157,6 +161,19 @@ public class MyHashMap<K, V> {
             }
         }
         return true;
+    }
+    public Set<K> KeySet(){
+        Set<K> tempSet = new HashSet<K>(entryCount()); //размера энтрикаунт
+        for (int i = 0; i < size; i++) {
+            if (table[i] !=null){
+                Entry<K,V> entry = table[i];
+                while (entry != null){
+                    tempSet.add(entry.key);
+                    entry = entry.next;
+                }
+            }
+        }
+        return tempSet;
     }
 
 

@@ -36,6 +36,7 @@ public class Main {
         System.out.println(kekMy.isEmpty());
 
         System.out.println(2088%7);
+        System.out.println(kekMy.KeySet());
 
 //        String Str1 = "a";
 //        String Str2 = Str1;

@@ -1,10 +1,12 @@
 import java.util.LinkedList;
+import java.util.Set;
 
 public class MyHashMultiMap<K,V> {
     private int size = 10;
+
     private MyHashMap<K, LinkedList<V>> myHashMap = new MyHashMap<>() ;
     public int getSize(){
-        return myHashMap.entryCount();
+        return myHashMap.getSize();
     }
     public boolean isEmpty(){
         return myHashMap.isEmpty();
@@ -23,9 +25,24 @@ public class MyHashMultiMap<K,V> {
     public void remove(K key){
         myHashMap.remove(key);
     }
-    public void printMyMultiHashMap(){
-        myHashMap.printMyHashMap();
+    public Set<K> keySet(){
+        return myHashMap.KeySet();
     }
+    public int entryCount(){
+        return myHashMap.entryCount();
+    }
+    public static <K, V> void print(MyHashMultiMap<K, V> multimap) {
+        for (K key : multimap.keySet()) {
+            System.out.println(key +"- "+multimap.get(key));
+        }
+    }
+
+
+//    public static printMyMultiHashMap(MyHashMultiMap<K, V> multimap,K key){
+//        for (int i = 0; i < size; i++) {
+//            System.out.println(multimap.get(key));
+//        }
+//    }
 
 
 
